@@ -44,6 +44,14 @@ Finally, run `bin/setup` to create the initial table cache (stored in the
 bin/run
 ```
 
+Or if you prefer to use Docker:
+
+```
+docker build -t db-bot .
+docker run -v $(pwd):/db-bot db-bot bin/setup
+docker run -v $(pwd):/db-bot db-bot
+```
+
 ## Cron
 
 Run the db-bot automatically by adding something like the following to your
