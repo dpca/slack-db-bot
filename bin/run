@@ -2,7 +2,7 @@
 
 require_relative '../lib/db-bot'
 
-unless Dir.exists?('tmp')
+unless Dir.exist?('tmp')
   puts "Uh oh, tmp folder doesn't exist - you probably need to run bin/setup"
   puts ''
   exit
