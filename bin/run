@@ -18,6 +18,7 @@ CONNECTIONS.each do |db|
 end
 
 slacker = SlackMessenger.new(Slack::Web::Client.new)
+puts slacker.client.auth_test
 
 CONNECTIONS.each do |db|
   diffs = DiffFinder.new(db)
