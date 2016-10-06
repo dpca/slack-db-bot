@@ -1,3 +1,7 @@
+[![Code Climate](https://codeclimate.com/github/dpca/slack-db-bot/badges/gpa.svg)](https://codeclimate.com/github/dpca/slack-db-bot)
+
+* * *
+
 # slack-db-bot
 
 Detects database table changes and posts about them in a channel
