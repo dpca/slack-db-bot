@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/db-bot'
+
+unless Dir.exists?('tmp')
+  puts "Uh oh, tmp folder doesn't exist - you probably need to run bin/setup"
+  puts ''
+  exit
+end
+
+# Loop through and make sure all files exist first
+CONNECTIONS.each do |db|
+  filename = TableCache.filename(db.name)
+  unless File.exist?(filename)
+    puts "Uh oh, #{filename} doesn't exist - you probably need to run bin/setup"
+    exit
+  end
+end
+
+slacker = SlackMessenger.new(Slack::Web::Client.new)
+
+CONNECTIONS.each do |db|
+  diffs = DiffFinder.new(db)
+
+  if diffs.any_changes?
+    puts diffs.output
+    slacker.send(diffs.output)
+    TableCache.save(db.name, diffs.new_mappings)
+  else
+    puts "#{db.name}: No changes"
+  end
+end

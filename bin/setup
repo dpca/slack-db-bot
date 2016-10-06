@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/db-bot'
+require 'fileutils'
+
+FileUtils.mkdir_p('tmp')
+
+CONNECTIONS.each do |db|
+  mapper = TableColumnMapper.new(db.connection)
+  TableCache.save(db.name, mapper.mapping)
+end
